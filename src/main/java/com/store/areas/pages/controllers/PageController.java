@@ -7,7 +7,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class PageController extends BaseController {
-
     @GetMapping("/")
     public ModelAndView index() {
         return super.view("views/home", "Store");
