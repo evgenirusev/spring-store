@@ -1,5 +1,6 @@
 package com.store.areas.user.entities;
 
+import com.store.areas.products.entities.Product;
 import com.store.areas.role.entities.Role;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -19,6 +20,7 @@ public class User implements UserDetails {
     private boolean isEnabled;
     private boolean isCredentialsNonExpired;
     private Set<Role> authorities;
+    private Set<Product> products;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -111,5 +113,18 @@ public class User implements UserDetails {
             this.authorities = new HashSet<>();
         }
         this.authorities.add(role);
+    }
+
+    @OneToMany(
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    public Set<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<Product> products) {
+        this.products = products;
     }
 }
