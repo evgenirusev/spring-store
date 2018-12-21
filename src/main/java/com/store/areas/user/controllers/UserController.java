@@ -35,7 +35,6 @@ public class UserController extends BaseController {
         return super.view("views/users/register", "Register");
     }
 
-
     @PostMapping("/register")
     public ModelAndView registerConfirm(@Valid @ModelAttribute UserRegisterBindingModel userRegisterBindingModel,
                                         BindingResult bindingResult) {
