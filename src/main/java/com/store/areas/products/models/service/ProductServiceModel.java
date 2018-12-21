@@ -3,6 +3,7 @@ package com.store.areas.products.models.service;
 import com.store.areas.user.models.service.UserServiceModel;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 public class ProductServiceModel {
     private String id;
@@ -14,6 +15,8 @@ public class ProductServiceModel {
     private String category;
 
     private BigDecimal price;
+
+    private LocalDateTime createdAt;
 
     private UserServiceModel userServiceModel;
 
@@ -63,5 +66,13 @@ public class ProductServiceModel {
 
     public void setUserServiceModel(UserServiceModel userServiceModel) {
         this.userServiceModel = userServiceModel;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 }
