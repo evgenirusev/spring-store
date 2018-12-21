@@ -13,9 +13,10 @@
         </div>
         <div class="form-group">
             <label for="exampleFormControlSelect1">Select product category</label>
-            <select th:field="*{category}" class="form-control" id="exampleFormControlSelect1">
-                <option th:value="|Category 1|"  th:text="|Category 1|"></option>
-                <option th:value="|Category 2|"  th:text="|Category 2|"></option>
+            <select th:field="*{categoryId}" class="form-control" id="exampleFormControlSelect1">
+                <th:block th:each="category : ${viewModel}">
+                    <option th:value="${category.id}"  th:text="${category.name}"></option>
+                </th:block>
             </select>
         </div>
         <label for="priceForProduct">Price:</label>
@@ -26,6 +27,6 @@
             <input id="priceForProduct" th:field="*{price}" type="number" class="form-control" aria-label="Amount (to the nearest dollar)">
         </div>
         <hr>
-        <button type="submit" class="btn bg-light-green btn-info ">Create</button>
+        <button type="submit" class="btn bg-light-green btn-danger ">Create</button>
     </form>
 </div>

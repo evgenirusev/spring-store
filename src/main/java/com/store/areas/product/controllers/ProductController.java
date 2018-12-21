@@ -1,9 +1,12 @@
-package com.store.areas.products.controllers;
+package com.store.areas.product.controllers;
 
 import com.store.abstractions.controller.BaseController;
-import com.store.areas.products.models.binding.CreateProductBindingModel;
-import com.store.areas.products.models.service.ProductServiceModel;
-import com.store.areas.products.services.ProductService;
+import com.store.areas.category.models.service.CategoryServiceModel;
+import com.store.areas.category.models.view.CategoryViewModel;
+import com.store.areas.category.services.CategoryService;
+import com.store.areas.product.models.binding.CreateProductBindingModel;
+import com.store.areas.product.models.service.ProductServiceModel;
+import com.store.areas.product.services.ProductService;
 import com.store.areas.user.models.service.UserServiceModel;
 import com.store.areas.user.services.UserService;
 import org.modelmapper.ModelMapper;
@@ -16,8 +19,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/products")
@@ -27,26 +31,37 @@ public class ProductController extends BaseController {
 
     private final ProductService productService;
 
+    private final CategoryService categoryService;
+
     private final UserService userService;
 
     @Autowired
-    public ProductController(ModelMapper modelMapper, ProductService productService, UserService userService) {
+    public ProductController(ModelMapper modelMapper, ProductService productService, CategoryService categoryService, UserService userService) {
         this.modelMapper = modelMapper;
         this.productService = productService;
+        this.categoryService = categoryService;
         this.userService = userService;
     }
 
     @GetMapping("/create")
     public ModelAndView create(@ModelAttribute CreateProductBindingModel bindingModel) {
-        return super.view("views/products/create");
+        List<CategoryViewModel> categoryViewModels = new ArrayList<>();
+        this.categoryService.findAllCategories().forEach(categoryServiceModel -> {
+            CategoryViewModel categoryViewModel =
+                    this.modelMapper.map(categoryServiceModel, CategoryViewModel.class);
+            categoryViewModels.add(categoryViewModel);
+        });
+        return super.view("views/products/create", categoryViewModels);
     }
 
     @PostMapping("create")
     public ModelAndView createConfirm(@ModelAttribute CreateProductBindingModel bindingModel, Authentication authentication) {
         ProductServiceModel productServiceModel = this.modelMapper.map(bindingModel, ProductServiceModel.class);
         UserServiceModel userServiceModel = this.userService.findByUsername(authentication.getName());
-        productServiceModel.setUserServiceModel(userServiceModel);
+        productServiceModel.setUser(userServiceModel);
         productServiceModel.setCreatedAt(LocalDateTime.now());
+        CategoryServiceModel categoryServiceModel = this.categoryService.findById(bindingModel.getCategoryId());
+        productServiceModel.setCategory(categoryServiceModel);
         productService.create(productServiceModel);
         return super.redirect("/");
     }

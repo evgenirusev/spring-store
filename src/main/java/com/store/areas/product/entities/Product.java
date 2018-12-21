@@ -1,5 +1,6 @@
-package com.store.areas.products.entities;
+package com.store.areas.product.entities;
 
+import com.store.areas.category.entities.Category;
 import com.store.areas.user.entities.User;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -19,6 +20,8 @@ public class Product {
     private BigDecimal price;
 
     private LocalDateTime createdAt;
+
+    private Category category;
 
     private User user;
 
@@ -83,5 +86,15 @@ public class Product {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }

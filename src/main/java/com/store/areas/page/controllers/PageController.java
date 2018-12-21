@@ -1,4 +1,4 @@
-package com.store.areas.pages.controllers;
+package com.store.areas.page.controllers;
 
 import com.store.abstractions.controller.BaseController;
 import org.springframework.stereotype.Controller;

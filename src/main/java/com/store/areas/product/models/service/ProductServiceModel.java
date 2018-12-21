@@ -1,5 +1,6 @@
-package com.store.areas.products.models.service;
+package com.store.areas.product.models.service;
 
+import com.store.areas.category.models.service.CategoryServiceModel;
 import com.store.areas.user.models.service.UserServiceModel;
 
 import java.math.BigDecimal;
@@ -12,13 +13,13 @@ public class ProductServiceModel {
 
     private String description;
 
-    private String category;
-
     private BigDecimal price;
 
     private LocalDateTime createdAt;
 
-    private UserServiceModel userServiceModel;
+    private CategoryServiceModel category;
+
+    private UserServiceModel user;
 
     public String getId() {
         return id;
@@ -44,14 +45,6 @@ public class ProductServiceModel {
         this.description = description;
     }
 
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
     public BigDecimal getPrice() {
         return price;
     }
@@ -60,19 +53,27 @@ public class ProductServiceModel {
         this.price = price;
     }
 
-    public UserServiceModel getUserServiceModel() {
-        return userServiceModel;
-    }
-
-    public void setUserServiceModel(UserServiceModel userServiceModel) {
-        this.userServiceModel = userServiceModel;
-    }
-
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public CategoryServiceModel getCategory() {
+        return category;
+    }
+
+    public void setCategory(CategoryServiceModel category) {
+        this.category = category;
+    }
+
+    public UserServiceModel getUser() {
+        return user;
+    }
+
+    public void setUser(UserServiceModel user) {
+        this.user = user;
     }
 }

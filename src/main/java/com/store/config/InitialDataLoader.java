@@ -11,12 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class DataLoader implements ApplicationRunner {
+public class InitialDataLoader implements ApplicationRunner {
 
     private final RoleService roleService;
 
     @Autowired
-    public DataLoader(RoleService roleService) {
+    public InitialDataLoader(RoleService roleService) {
         this.roleService = roleService;
     }
 

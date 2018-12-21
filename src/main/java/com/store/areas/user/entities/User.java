@@ -1,7 +1,8 @@
 package com.store.areas.user.entities;
 
-import com.store.areas.products.entities.Product;
+import com.store.areas.product.entities.Product;
 import com.store.areas.role.entities.Role;
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
@@ -11,7 +12,7 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 public class User implements UserDetails {
-    private Long id;
+    private String id;
     private String password;
     private String username;
     private String email;
@@ -23,12 +24,16 @@ public class User implements UserDetails {
     private Set<Product> products;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long getId() {
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator"
+    )
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

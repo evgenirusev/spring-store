@@ -1,6 +1,6 @@
-package com.store.areas.products.repositories;
+package com.store.areas.product.repositories;
 
-import com.store.areas.products.entities.Product;
+import com.store.areas.product.entities.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -6,7 +6,7 @@ import java.util.Set;
 
 public class UserServiceModel {
 
-    private Long id;
+    private String id;
 
     private String password;
 
@@ -16,11 +16,11 @@ public class UserServiceModel {
 
     private Set<RoleServiceModel> roles;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

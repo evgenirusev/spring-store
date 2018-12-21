@@ -1,8 +1,8 @@
-package com.store.areas.products.services;
+package com.store.areas.product.services;
 
-import com.store.areas.products.entities.Product;
-import com.store.areas.products.models.service.ProductServiceModel;
-import com.store.areas.products.repositories.ProductRepository;
+import com.store.areas.product.entities.Product;
+import com.store.areas.product.models.service.ProductServiceModel;
+import com.store.areas.product.repositories.ProductRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

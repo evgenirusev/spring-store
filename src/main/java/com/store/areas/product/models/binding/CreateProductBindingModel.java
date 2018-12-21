@@ -1,4 +1,4 @@
-package com.store.areas.products.models.binding;
+package com.store.areas.product.models.binding;
 
 import java.math.BigDecimal;
 
@@ -7,7 +7,7 @@ public class CreateProductBindingModel {
 
     private String description;
 
-    private String category;
+    private String categoryId;
 
     private BigDecimal price;
 
@@ -30,12 +30,12 @@ public class CreateProductBindingModel {
         this.description = description;
     }
 
-    public String getCategory() {
-        return category;
+    public String getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
     }
 
     public BigDecimal getPrice() {
