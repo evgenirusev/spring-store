@@ -1,0 +1,31 @@
+<div class="container view bg-white create-content" xmlns:th="http://www.thymeleaf.org">
+    <h1>Create New Product</h1>
+    <form th:object="${createProductBindingModel}" class="p-4" th:method="post" th:action="@{/products/create}">
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Product Name</label>
+            <input type="text" class="form-control" th:field="*{name}" id="exampleFormControlInput1"
+                   placeholder="Enter your product name">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Product Description</label>
+            <textarea class="form-control" th:field="*{description}" id="exampleFormControlTextarea1"
+                      placeholder="Describe your product" rows="5"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Select product category</label>
+            <select th:field="*{category}" class="form-control" id="exampleFormControlSelect1">
+                <option th:value="|Category 1|"  th:text="|Category 1|"></option>
+                <option th:value="|Category 2|"  th:text="|Category 2|"></option>
+            </select>
+        </div>
+        <label for="priceForProduct">Price:</label>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">$</span>
+            </div>
+            <input id="priceForProduct" th:field="*{price}" type="number" class="form-control" aria-label="Amount (to the nearest dollar)">
+        </div>
+        <hr>
+        <button type="submit" class="btn bg-light-green btn-info ">Create</button>
+    </form>
+</div>

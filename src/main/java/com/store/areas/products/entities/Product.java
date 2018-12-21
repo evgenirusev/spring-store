@@ -14,6 +14,8 @@ public class Product {
 
     private String name;
 
+    private String description;
+
     private BigDecimal price;
 
     private LocalDateTime createdAt;
@@ -44,6 +46,15 @@ public class Product {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Column(nullable = true)
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Column(nullable = false)
