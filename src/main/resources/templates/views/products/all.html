@@ -1,34 +1,38 @@
-<div class="container" xmlns:th="http://www.w3.org/1999/xhtml">
-    <div class="row pt-3">
+<div class="container pt-3" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="row">
         <div class="col-md-4 col-lg-2 col-xl-2 ">
             <h2>Results:</h2>
             <hr>
-            <div class="list-category">
+            <div class="list-categories">
                 <h5 class="title">
                     Categories
                 </h5>
-                <th:block th:each="category : ${viewModel.categories}">
+                <th:block th:each="categories : ${viewModel.categories}">
                     <div class="list-group">
-                        <a th:href="@{/products?category={name}(name=${category.name})}" class="list-group-item d-flex justify-content-between text-dark">
-                            <span class="" th:text="${category.name}"></span>
+                        <a th:href="@{/products?categories={name}(name=${categories.name})}"
+                           class="list-group-item d-flex justify-content-between text-dark">
+                            <span class="" th:text="${categories.name}"></span>
                             <div>
-                                <span class="badge text-white bg-info p-1" th:text="${#sets.size(category.products)}"></span>
+                                <span class="badge text-white bg-info p-1"
+                                      th:text="${#sets.size(categories.products)}"></span>
                             </div>
                         </a>
                     </div>
                 </th:block>
             </div>
             <hr>
-            <div class="list-category">
+            <div class="list-categories">
                 <h5 class="title">
                     Brands
                 </h5>
                 <th:block th:each="brand : ${viewModel.brands}">
                     <div class="list-group">
-                        <a th:href="@{/products?brand={name}(name=${brand.name})}" class="list-group-item d-flex justify-content-between">
+                        <a th:href="@{/products?brand={name}(name=${brand.name})}"
+                           class="list-group-item d-flex justify-content-between">
                             <span class="text-dark" th:text="${brand.name}"></span>
                             <div>
-                                <span class="badge text-white bg-info p-1" th:text="${#sets.size(brand.products)}"></span>
+                                <span class="badge text-white bg-info p-1"
+                                      th:text="${#sets.size(brand.products)}"></span>
                             </div>
                         </a>
                     </div>
@@ -40,16 +44,18 @@
             <hr>
             <div class="row">
                 <th:block th:each="product : ${viewModel.products}">
-                    <div class="col-xs-18 col-sm-6 col-md-6 col-lg-4 col-xl-3 text-center mb-5">
-                        <div class="thumbnail">
-                            <div class="caption">
-                                <img src="img/product.png" class="w-75">
-                                <h5 th:text="${product.name}"></h5>
-                                <p th:text="|$${product.price}|"></p>
-                                <a href="#" class="btn btn-info btn-xs" role="button">View</a>
+                        <div class="col-xs-18 col-sm-6 col-md-6 col-lg-4 col-xl-3 text-center mb-5">
+                            <div class="thumbnail">
+                                <div class="caption">
+                                    <a th:href="@{/products/{name}(name=${product.name})}">
+                                        <img src="img/product.png" class="w-75">
+                                    </a>
+                                    <h5 class="pt-1" th:text="${product.name}"></h5>
+                                    <p th:text="|$${product.price}|"></p>
+                                    <a th:href="@{/products/{name}(name=${product.name})}" class="btn btn-info btn-xs" role="button">View</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
                 </th:block>
             </div>
         </div>

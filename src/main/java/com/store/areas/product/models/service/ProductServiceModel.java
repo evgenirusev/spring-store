@@ -65,6 +65,14 @@ public class ProductServiceModel {
         this.createdAt = createdAt;
     }
 
+    public BrandServiceModel getBrand() {
+        return brand;
+    }
+
+    public void setBrand(BrandServiceModel brand) {
+        this.brand = brand;
+    }
+
     public Set<CategoryServiceModel> getCategories() {
         return categories;
     }
@@ -79,13 +87,5 @@ public class ProductServiceModel {
 
     public void setUser(UserServiceModel user) {
         this.user = user;
-    }
-
-    public BrandServiceModel getBrand() {
-        return brand;
-    }
-
-    public void setBrand(BrandServiceModel brand) {
-        this.brand = brand;
     }
 }

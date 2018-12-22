@@ -42,6 +42,13 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductServiceModel findByName(String name) {
         Product product = this.productRepository.findByName(name);
-        return this.modelMapper.map(product, ProductServiceModel.class);
+        ProductServiceModel productServiceModel = this.modelMapper.map(product, ProductServiceModel.class);
+        return productServiceModel;
+    }
+
+    @Override
+    public ProductServiceModel findById(String id) {
+        Product productEntity = this.productRepository.findByName(id);
+        return this.modelMapper.map(productEntity, ProductServiceModel.class);
     }
 }

@@ -10,4 +10,6 @@ public interface ProductService {
     Set<ProductServiceModel> findAll();
 
     ProductServiceModel findByName(String name);
+
+    ProductServiceModel findById(String id);
 }

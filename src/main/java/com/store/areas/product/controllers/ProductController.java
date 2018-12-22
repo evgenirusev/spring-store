@@ -120,8 +120,9 @@ public class ProductController extends BaseController {
     }
 
     @GetMapping("/{name}")
-    public ModelAndView byName(@RequestParam String name) {
-//        ProductViewModel productViewModel = this.productService.fi
-        return null;
+    public ModelAndView byName(@PathVariable String name) {
+        ProductServiceModel productServiceModel = this.productService.findByName(name);
+        ProductViewModel productViewModel = this.modelMapper.map(productServiceModel, ProductViewModel.class);
+        return super.view("/views/products/by-name", productViewModel);
     }
 }

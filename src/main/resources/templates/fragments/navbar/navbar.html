@@ -1,6 +1,6 @@
 <div class="container-fluid m-0 p-0" xmlns:th="http://www.w3.org/1999/html">
-    <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
-        <a class="navbar-brand text-white" th:href="@{/}">Store</a>
+    <nav class="navbar navbar-light bg-light navbar-expand-lg">
+        <a class="navbar-brand" th:href="@{/}">Store</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
                 aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -8,22 +8,22 @@
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link text-white" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item text-white">
-                    <a class="nav-link text-white" th:href="@{/products}">Products</a>
-                </li>
-                <li class="nav-item text-white">
-                    <a class="nav-link text-white" th:href="@{/categories}">Categories</a>
-                </li>
-                <li class="nav-item text-white">
-                    <a class="nav-link text-white" th:href="@{/brands}">Brands</a>
+                    <a class="nav-link" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" th:href="@{/contact}">Contact</a>
+                    <a class="nav-link" th:href="@{/products}">Products</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" th:href="@{/about}">About</a>
+                    <a class="nav-link" th:href="@{/categories}">Categories</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" th:href="@{/brands}">Brands</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/contact}">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/about}">About</a>
                 </li>
             </ul>
             <div sec:authorize="isAnonymous()">

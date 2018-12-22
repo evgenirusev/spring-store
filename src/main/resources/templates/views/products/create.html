@@ -20,8 +20,8 @@
             <div class="form-group">
                 <span>Product categories:</span>
                 <select class="custom-select mb-2" size="3" multiple th:field="*{categories}">
-                    <th:block th:each="category : ${viewModel}">
-                        <option th:value="${category.id}" th:text="${category.name}"></option>
+                    <th:block th:each="categories : ${viewModel}">
+                        <option th:value="${categories.id}" th:text="${categories.name}"></option>
                     </th:block>
                 </select>
             </div>
