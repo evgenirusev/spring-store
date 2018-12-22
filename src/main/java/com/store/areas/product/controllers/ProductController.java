@@ -77,14 +77,22 @@ public class ProductController extends BaseController {
     }
 
     @GetMapping("")
-    public ModelAndView all(@RequestParam(value = "category", required = false) String categoryNameGetParameter) {
+    public ModelAndView all(
+            @RequestParam(value = "category", required = false) String categoryNameGetParameter,
+            @RequestParam(value = "brand", required = false) String brandNameGetParameter) {
         AllProductsViewModel allProductsViewModel = new AllProductsViewModel();
         Set<ProductViewModel> productViewModels = new TreeSet<>(Comparator.comparing(ProductViewModel::getName));
         Set<CategoryViewModel> categoryViewModels = new TreeSet<>(Comparator.comparing(CategoryViewModel::getName));
         Set<BrandViewModel> brandViewModels = new TreeSet<>(Comparator.comparing(BrandViewModel::getName));
 
+        // Refactor
         if (categoryNameGetParameter != null) {
             this.categoryService.findByName(categoryNameGetParameter).getProducts().forEach(productServiceModel -> {
+                ProductViewModel productViewModel = this.modelMapper.map(productServiceModel, ProductViewModel.class);
+                productViewModels.add(productViewModel);
+            });
+        } else if (brandNameGetParameter != null) {
+            this.brandService.findByName(brandNameGetParameter).getProducts().forEach(productServiceModel -> {
                 ProductViewModel productViewModel = this.modelMapper.map(productServiceModel, ProductViewModel.class);
                 productViewModels.add(productViewModel);
             });
@@ -109,5 +117,11 @@ public class ProductController extends BaseController {
         allProductsViewModel.setCategories(categoryViewModels);
         allProductsViewModel.setBrands(brandViewModels);
         return super.view("/views/products/all", allProductsViewModel);
+    }
+
+    @GetMapping("/{name}")
+    public ModelAndView byName(@RequestParam String name) {
+//        ProductViewModel productViewModel = this.productService.fi
+        return null;
     }
 }

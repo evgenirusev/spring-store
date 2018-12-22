@@ -1,10 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+<div class="container mb-4">
+    <h1>Brands</h1>
+    <hr>
+    <th:block th:each="brand : ${viewModel}">
+        <div class="list-group">
+            <a th:href="@{/products?brand={name}(name=${brand.name})}" class="list-group-item list-group-item-action align-items-start d-flex justify-content-between">
+                <h5 th:text="${brand.name}" class="mb-1"></h5>
+                <span th:text="${#sets.size(brand.products)}" class="badge badge-pill bg-info text-white"></span>
+            </a>
+        </div>
+    </th:block>
+</div>

@@ -8,4 +8,6 @@ public interface ProductService {
     void create(ProductServiceModel productServiceModel);
 
     Set<ProductServiceModel> findAll();
+
+    ProductServiceModel findByName(String name);
 }

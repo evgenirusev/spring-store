@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Service
@@ -38,5 +37,11 @@ public class ProductServiceImpl implements ProductService {
             productServiceModels.add(productServiceModel);
         });
         return productServiceModels;
+    }
+
+    @Override
+    public ProductServiceModel findByName(String name) {
+        Product product = this.productRepository.findByName(name);
+        return this.modelMapper.map(product, ProductServiceModel.class);
     }
 }
