@@ -1,4 +1,4 @@
-package com.store.areas.category.entities;
+package com.store.areas.brand.entities;
 
 import com.store.areas.product.entities.Product;
 import org.hibernate.annotations.GenericGenerator;
@@ -7,18 +7,15 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "categories")
-public class Category {
-
+@Table(name = "brands")
+public class Brand {
     private String id;
 
     private String name;
 
-    private String description;
-
     private Set<Product> products;
 
-    public Category() {
+    public Brand() {
     }
 
     @Id
@@ -44,16 +41,12 @@ public class Category {
         this.name = name;
     }
 
-    @Column(nullable = true)
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    @ManyToMany(mappedBy = "categories", fetch = FetchType.EAGER)
+    @OneToMany(
+            mappedBy = "brands",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.EAGER
+    )
     public Set<Product> getProducts() {
         return products;
     }

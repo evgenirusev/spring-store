@@ -46,7 +46,7 @@ public class CategoryController extends BaseController {
 
         CategoryServiceModel categoryServiceModel = this.modelMapper.map(categoryBindingModel, CategoryServiceModel.class);
         this.categoryService.create(categoryServiceModel);
-        return super.redirect("/categories/all");
+        return super.redirect("/categories");
     }
 
     @GetMapping("")
@@ -63,6 +63,6 @@ public class CategoryController extends BaseController {
     @GetMapping("/{categoryName}")
     public ModelAndView findPostsByCategory(@PathVariable String categoryName) {
         CategoryServiceModel categoryServiceModel = this.categoryService.findByName(categoryName);
-        return super.view("views/categories/posts-by-category", categoryServiceModel);
+        return super.view("views/categories/products-by-category", categoryServiceModel);
     }
 }

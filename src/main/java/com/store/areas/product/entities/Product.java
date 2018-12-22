@@ -1,5 +1,6 @@
 package com.store.areas.product.entities;
 
+import com.store.areas.brand.entities.Brand;
 import com.store.areas.category.entities.Category;
 import com.store.areas.user.entities.User;
 import org.hibernate.annotations.GenericGenerator;
@@ -23,6 +24,8 @@ public class Product {
     private LocalDateTime createdAt;
 
     private Set<Category> categories;
+
+    private Brand brand;
 
     private User user;
 
@@ -87,6 +90,16 @@ public class Product {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "brand_id")
+    public Brand getBrand() {
+        return brand;
+    }
+
+    public void setBrand(Brand brand) {
+        this.brand = brand;
     }
 
     @ManyToMany(fetch = FetchType.EAGER)
