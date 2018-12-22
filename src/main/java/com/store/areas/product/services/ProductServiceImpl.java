@@ -7,6 +7,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 @Service
 public class ProductServiceImpl implements ProductService {
 
@@ -24,5 +28,15 @@ public class ProductServiceImpl implements ProductService {
     public void create(ProductServiceModel productServiceModel) {
         Product productEntity = this.modelMapper.map(productServiceModel, Product.class);
         this.productRepository.save(productEntity);
+    }
+
+    @Override
+    public Set<ProductServiceModel> findAll() {
+        Set<ProductServiceModel> productServiceModels = new HashSet<>();
+        this.productRepository.findAll().forEach(productEntity -> {
+            ProductServiceModel productServiceModel = this.modelMapper.map(productEntity, ProductServiceModel.class);
+            productServiceModels.add(productServiceModel);
+        });
+        return productServiceModels;
     }
 }

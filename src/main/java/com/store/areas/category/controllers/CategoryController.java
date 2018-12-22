@@ -3,7 +3,6 @@ package com.store.areas.category.controllers;
 import com.store.abstractions.controller.BaseController;
 import com.store.areas.category.models.binding.CategoryBindingModel;
 import com.store.areas.category.models.service.CategoryServiceModel;
-import com.store.areas.category.models.view.CategoryNamesViewModel;
 import com.store.areas.category.models.view.CategoryViewModel;
 import com.store.areas.category.services.CategoryService;
 import org.modelmapper.ModelMapper;
@@ -53,16 +52,10 @@ public class CategoryController extends BaseController {
     public ModelAndView allCategories() {
         Set<CategoryViewModel> categoryViewModels
                 = new TreeSet<CategoryViewModel>(Comparator.comparing(CategoryViewModel::getId));
-        this.categoryService.findAllCategories().forEach(categoryServiceModel -> {
+        this.categoryService.findAll().forEach(categoryServiceModel -> {
             CategoryViewModel categoryViewModel = this.modelMapper.map(categoryServiceModel, CategoryViewModel.class);
             categoryViewModels.add(categoryViewModel);
         });
         return super.view("views/categories/all", categoryViewModels);
-    }
-
-    @GetMapping("/{categoryName}")
-    public ModelAndView findPostsByCategory(@PathVariable String categoryName) {
-        CategoryServiceModel categoryServiceModel = this.categoryService.findByName(categoryName);
-        return super.view("views/categories/products-by-category", categoryServiceModel);
     }
 }

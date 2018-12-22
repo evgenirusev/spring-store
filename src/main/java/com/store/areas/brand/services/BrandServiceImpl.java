@@ -3,9 +3,13 @@ package com.store.areas.brand.services;
 import com.store.areas.brand.entities.Brand;
 import com.store.areas.brand.models.service.BrandServiceModel;
 import com.store.areas.brand.repositories.BrandRepository;
+import com.store.areas.product.models.service.ProductServiceModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
 public class BrandServiceImpl implements BrandService {
@@ -53,5 +57,15 @@ public class BrandServiceImpl implements BrandService {
         }
 
         return this.modelMapper.map(brand, BrandServiceModel.class);
+    }
+
+    @Override
+    public Set<BrandServiceModel> findAll() {
+        Set<BrandServiceModel> brandServiceModels = new HashSet<>();
+        this.brandRepository.findAll().forEach(brandEntity -> {
+            BrandServiceModel brandServiceModel = this.modelMapper.map(brandEntity, BrandServiceModel.class);
+            brandServiceModels.add(brandServiceModel);
+        });
+        return brandServiceModels;
     }
 }

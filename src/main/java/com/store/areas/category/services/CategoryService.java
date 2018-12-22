@@ -9,7 +9,7 @@ public interface CategoryService {
 
     CategoryServiceModel findByName(String name);
 
-    Set<CategoryServiceModel> findAllCategories();
+    Set<CategoryServiceModel> findAll();
 
     CategoryServiceModel findById(String id);
 }

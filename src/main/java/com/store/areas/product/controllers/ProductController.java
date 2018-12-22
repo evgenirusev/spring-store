@@ -2,12 +2,15 @@ package com.store.areas.product.controllers;
 
 import com.store.abstractions.controller.BaseController;
 import com.store.areas.brand.models.service.BrandServiceModel;
+import com.store.areas.brand.models.view.BrandViewModel;
 import com.store.areas.brand.services.BrandService;
 import com.store.areas.category.models.service.CategoryServiceModel;
 import com.store.areas.category.models.view.CategoryViewModel;
 import com.store.areas.category.services.CategoryService;
 import com.store.areas.product.models.binding.CreateProductBindingModel;
 import com.store.areas.product.models.service.ProductServiceModel;
+import com.store.areas.product.models.view.AllProductsViewModel;
+import com.store.areas.product.models.view.ProductViewModel;
 import com.store.areas.product.services.ProductService;
 import com.store.areas.user.models.service.UserServiceModel;
 import com.store.areas.user.services.UserService;
@@ -15,17 +18,11 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Controller
 @RequestMapping("/products")
@@ -53,7 +50,7 @@ public class ProductController extends BaseController {
     @GetMapping("/create")
     public ModelAndView create(@ModelAttribute CreateProductBindingModel bindingModel) {
         List<CategoryViewModel> categoryViewModels = new ArrayList<>();
-        this.categoryService.findAllCategories().forEach(categoryServiceModel -> {
+        this.categoryService.findAll().forEach(categoryServiceModel -> {
             CategoryViewModel categoryViewModel =
                     this.modelMapper.map(categoryServiceModel, CategoryViewModel.class);
             categoryViewModels.add(categoryViewModel);
@@ -80,19 +77,37 @@ public class ProductController extends BaseController {
     }
 
     @GetMapping("")
-    public ModelAndView all() {
-        List<Integer> ints = new ArrayList<>();
-        ints.add(1);
-        ints.add(2);
-        ints.add(3);
-        ints.add(4);
-        ints.add(5);
-        ints.add(6);
-        ints.add(7);
-        ints.add(8);
-        ints.add(9);
-        ints.add(10);
-        return super.view("/views/products/all", ints);
-    }
+    public ModelAndView all(@RequestParam(value = "category", required = false) String categoryNameGetParameter) {
+        AllProductsViewModel allProductsViewModel = new AllProductsViewModel();
+        Set<ProductViewModel> productViewModels = new TreeSet<>(Comparator.comparing(ProductViewModel::getName));
+        Set<CategoryViewModel> categoryViewModels = new TreeSet<>(Comparator.comparing(CategoryViewModel::getName));
+        Set<BrandViewModel> brandViewModels = new TreeSet<>(Comparator.comparing(BrandViewModel::getName));
 
+        if (categoryNameGetParameter != null) {
+            this.categoryService.findByName(categoryNameGetParameter).getProducts().forEach(productServiceModel -> {
+                ProductViewModel productViewModel = this.modelMapper.map(productServiceModel, ProductViewModel.class);
+                productViewModels.add(productViewModel);
+            });
+        } else {
+            this.productService.findAll().forEach(productServiceModel -> {
+                ProductViewModel productViewModel = this.modelMapper.map(productServiceModel, ProductViewModel.class);
+                productViewModels.add(productViewModel);
+            });
+        }
+
+        this.categoryService.findAll().forEach(categoryServiceModel -> {
+            CategoryViewModel categoryViewModel= this.modelMapper.map(categoryServiceModel, CategoryViewModel.class);
+            categoryViewModels.add(categoryViewModel);
+        });
+
+        this.brandService.findAll().forEach(brandServiceModel -> {
+            BrandViewModel brandView = this.modelMapper.map(brandServiceModel, BrandViewModel.class);
+            brandViewModels.add(brandView);
+        });
+
+        allProductsViewModel.setProducts(productViewModels);
+        allProductsViewModel.setCategories(categoryViewModels);
+        allProductsViewModel.setBrands(brandViewModels);
+        return super.view("/views/products/all", allProductsViewModel);
+    }
 }

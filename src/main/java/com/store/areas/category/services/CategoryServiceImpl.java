@@ -37,7 +37,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Set<CategoryServiceModel> findAllCategories() {
+    public Set<CategoryServiceModel> findAll() {
         Set<CategoryServiceModel> categoryServiceModels = new HashSet<>();
         this.categoryRepository.findAll().forEach(category -> {
             CategoryServiceModel serviceModel = this.modelMapper.map(category, CategoryServiceModel.class);
