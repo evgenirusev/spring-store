@@ -12,8 +12,8 @@
                       placeholder="Describe your product" rows="5"></textarea>
         </div>
         <div class="form-group">
-            <label for="exampleFormControlSelect1">Select product category</label>
-            <select th:field="*{categoryId}" class="form-control" id="exampleFormControlSelect1">
+            <span>Product categories:</span>
+            <select class="custom-select mb-2" size="3" multiple th:field="*{categories}">
                 <th:block th:each="category : ${viewModel}">
                     <option th:value="${category.id}"  th:text="${category.name}"></option>
                 </th:block>

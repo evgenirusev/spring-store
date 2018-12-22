@@ -7,7 +7,7 @@ public class CreateProductBindingModel {
 
     private String description;
 
-    private String categoryId;
+    private String[] categories;
 
     private BigDecimal price;
 
@@ -30,12 +30,12 @@ public class CreateProductBindingModel {
         this.description = description;
     }
 
-    public String getCategoryId() {
-        return categoryId;
+    public String[] getCategories() {
+        return categories;
     }
 
-    public void setCategoryId(String categoryId) {
-        this.categoryId = categoryId;
+    public void setCategories(String[] categories) {
+        this.categories = categories;
     }
 
     public BigDecimal getPrice() {

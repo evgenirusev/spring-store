@@ -7,6 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 public class Product {
@@ -21,7 +22,7 @@ public class Product {
 
     private LocalDateTime createdAt;
 
-    private Category category;
+    private Set<Category> categories;
 
     private User user;
 
@@ -88,13 +89,16 @@ public class Product {
         this.user = user;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id")
-    public Category getCategory() {
-        return category;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "products_categories",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
+    public Set<Category> getCategories() {
+        return categories;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
     }
 }

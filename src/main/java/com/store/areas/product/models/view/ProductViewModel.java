@@ -3,13 +3,14 @@ package com.store.areas.product.models.view;
 import com.store.areas.category.models.view.CategoryViewModel;
 
 import java.math.BigDecimal;
+import java.util.Set;
 
 public class ProductViewModel {
     private String name;
 
     private BigDecimal price;
 
-    private CategoryViewModel category;
+    private Set<CategoryViewModel> category;
 
     public String getName() {
         return name;
@@ -27,11 +28,11 @@ public class ProductViewModel {
         this.price = price;
     }
 
-    public CategoryViewModel getCategory() {
+    public Set<CategoryViewModel> getCategory() {
         return category;
     }
 
-    public void setCategory(CategoryViewModel category) {
+    public void setCategory(Set<CategoryViewModel> category) {
         this.category = category;
     }
 }

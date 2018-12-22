@@ -53,12 +53,7 @@ public class Category {
         this.description = description;
     }
 
-    @OneToMany(
-            mappedBy = "category",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true,
-            fetch = FetchType.EAGER
-    )
+    @ManyToMany(mappedBy = "categories", fetch = FetchType.EAGER)
     public Set<Product> getProducts() {
         return products;
     }

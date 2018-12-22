@@ -5,6 +5,7 @@ import com.store.areas.user.models.service.UserServiceModel;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 public class ProductServiceModel {
     private String id;
@@ -17,7 +18,7 @@ public class ProductServiceModel {
 
     private LocalDateTime createdAt;
 
-    private CategoryServiceModel category;
+    private Set<CategoryServiceModel> categories;
 
     private UserServiceModel user;
 
@@ -61,12 +62,12 @@ public class ProductServiceModel {
         this.createdAt = createdAt;
     }
 
-    public CategoryServiceModel getCategory() {
-        return category;
+    public Set<CategoryServiceModel> getCategories() {
+        return categories;
     }
 
-    public void setCategory(CategoryServiceModel category) {
-        this.category = category;
+    public void setCategories(Set<CategoryServiceModel> categories) {
+        this.categories = categories;
     }
 
     public UserServiceModel getUser() {

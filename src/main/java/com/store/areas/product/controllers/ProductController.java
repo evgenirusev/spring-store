@@ -21,7 +21,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/products")
@@ -60,8 +62,12 @@ public class ProductController extends BaseController {
         UserServiceModel userServiceModel = this.userService.findByUsername(authentication.getName());
         productServiceModel.setUser(userServiceModel);
         productServiceModel.setCreatedAt(LocalDateTime.now());
-        CategoryServiceModel categoryServiceModel = this.categoryService.findById(bindingModel.getCategoryId());
-        productServiceModel.setCategory(categoryServiceModel);
+        Set<CategoryServiceModel> categoryServiceModels = new HashSet<>();
+        for (String categoryId : bindingModel.getCategories()) {
+            CategoryServiceModel categoryServiceModel = this.categoryService.findById(categoryId);
+            categoryServiceModels.add(categoryServiceModel);
+        }
+        productServiceModel.setCategories(categoryServiceModels);
         productService.create(productServiceModel);
         return super.redirect("/");
     }
