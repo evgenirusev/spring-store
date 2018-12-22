@@ -1,5 +1,6 @@
 package com.store.areas.user.models.service;
 
+import com.store.areas.product.models.service.ProductServiceModel;
 import com.store.areas.role.models.service.RoleServiceModel;
 
 import java.util.Set;
@@ -17,6 +18,8 @@ public class UserServiceModel {
     private boolean admin;
 
     private Set<RoleServiceModel> roles;
+
+    private Set<ProductServiceModel> products;
 
     public String getId() {
         return id;
@@ -64,5 +67,13 @@ public class UserServiceModel {
 
     public void setAdmin(boolean admin) {
         this.admin = admin;
+    }
+
+    public Set<ProductServiceModel> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<ProductServiceModel> products) {
+        this.products = products;
     }
 }

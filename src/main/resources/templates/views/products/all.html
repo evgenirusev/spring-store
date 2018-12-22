@@ -40,7 +40,13 @@
             </div>
         </div>
         <div class="col-md-8 col-lg-10 col-xl-10">
-            <h2>Products:</h2>
+            <div class="d-flex justify-content-between">
+                <h2>Products:</h2>
+                <form class="form-inline my-2 my-lg-0" method="get" action="/products">
+                    <input name="search" class="form-control mr-sm-2" type="search" placeholder="Search by name" aria-label="Search">
+                    <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
             <hr>
             <div class="row">
                 <th:block th:each="product : ${viewModel.products}">
