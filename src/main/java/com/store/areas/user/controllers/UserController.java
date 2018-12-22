@@ -38,13 +38,12 @@ public class UserController extends BaseController {
     @PostMapping("/register")
     public ModelAndView registerConfirm(@Valid @ModelAttribute UserRegisterBindingModel userRegisterBindingModel,
                                         BindingResult bindingResult) {
-
         if (bindingResult.hasErrors()) {
             return super.view("views/users/register", "Register");
         }
 
         UserServiceModel userServiceModel = this.modelMapper.map(userRegisterBindingModel, UserServiceModel.class);
-        this.userService.createUser(userServiceModel);
+        this.userService.create(userServiceModel);
         return super.redirect("/login");
     }
 

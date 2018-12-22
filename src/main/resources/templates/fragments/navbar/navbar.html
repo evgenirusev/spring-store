@@ -24,13 +24,13 @@
                 </li>
             </ul>
             <div sec:authorize="isAnonymous()">
-                <th:block th:include="~{fragments/navbar/roles/guest}"/>
+                <th:block th:include="~{fragments/navbar/authorities/guest}"/>
             </div>
             <div sec:authorize="hasAuthority('USER') and !hasAuthority('ADMIN')">
-                <th:block th:include="~{fragments/navbar/roles/user}"/>
+                <th:block th:include="~{fragments/navbar/authorities/user}"/>
             </div>
             <div sec:authorize="hasAuthority('ADMIN')">
-                <th:block th:include="~{fragments/navbar/roles/admin}"/>
+                <th:block th:include="~{fragments/navbar/authorities/admin}"/>
             </div>
         </div>
     </nav>

@@ -4,7 +4,7 @@ import com.store.areas.user.models.service.UserServiceModel;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 public interface UserService extends UserDetailsService {
-    void createUser(UserServiceModel userServiceModele);
+    void create(UserServiceModel userServiceModele);
 
     boolean isUsernameTaken(String username);
 

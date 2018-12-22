@@ -14,6 +14,8 @@ public class UserServiceModel {
 
     private String email;
 
+    private boolean admin;
+
     private Set<RoleServiceModel> roles;
 
     public String getId() {
@@ -54,5 +56,13 @@ public class UserServiceModel {
 
     public void setRoles(Set<RoleServiceModel> roles) {
         this.roles = roles;
+    }
+
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
     }
 }

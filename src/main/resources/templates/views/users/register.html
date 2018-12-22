@@ -22,6 +22,10 @@
             <input type="email" class="form-control" id="email" th:field="*{email}" placeholder="Your Email..."/>
             <div class="text-danger" id="emailHelp"  th:each="error : ${#fields.errors('email')}" th:text="${error}">Error Message</div>
         </div>
+        <div class="form-check text-center m-3">
+            <input type="checkbox" class="form-check-input" id="is-admin" name="admin">
+            <label class="form-check-label" for="is-admin">Admin</label>
+        </div>
         <div class="button-holder d-flex justify-content-around pb-2">
             <button type="submit" class="btn bg-light-green btn-info">Register</button>
         </div>
