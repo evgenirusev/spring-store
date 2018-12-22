@@ -7,7 +7,7 @@
                 <div class="d-flex w-100 justify-content-between">
                     <h5 th:text="${categories.name}" class="mb-1"></h5>
                 </div>
-                <span th:text="${#sets.size(categories.products)}" class="badge badge-pill bg-dark text-white float-right"></span>
+                <span th:text="${#sets.size(categories.products)}" class="badge badge-pill bg-danger text-white float-right"></span>
                 <p th:text="${categories.description}" class="mb-1"></p>
                 <small class="text-muted">Created: 1 hour ago</small>
             </a>

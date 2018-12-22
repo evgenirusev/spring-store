@@ -78,4 +78,21 @@ public class ProductController extends BaseController {
         productService.create(productServiceModel);
         return super.redirect("/");
     }
+
+    @GetMapping("")
+    public ModelAndView all() {
+        List<Integer> ints = new ArrayList<>();
+        ints.add(1);
+        ints.add(2);
+        ints.add(3);
+        ints.add(4);
+        ints.add(5);
+        ints.add(6);
+        ints.add(7);
+        ints.add(8);
+        ints.add(9);
+        ints.add(10);
+        return super.view("/views/products/all", ints);
+    }
+
 }
