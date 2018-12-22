@@ -34,22 +34,22 @@ public class CategoryController extends BaseController {
 
     @GetMapping("/create")
     public ModelAndView createCategory(@ModelAttribute CategoryBindingModel categoryBindingModel) {
-        return super.view("/views/category/create", "Create Category");
+        return super.view("/views/categories/create", "Create Category");
     }
 
     @PostMapping("/create")
     public ModelAndView persistCategory(@Valid @ModelAttribute CategoryBindingModel categoryBindingModel, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            return super.view("/views/category/create", "Create Category");
+            return super.view("/views/categories/create", "Create Category");
         }
 
         CategoryServiceModel categoryServiceModel = this.modelMapper.map(categoryBindingModel, CategoryServiceModel.class);
         this.categoryService.create(categoryServiceModel);
-        return super.redirect("/category/all");
+        return super.redirect("/categories/all");
     }
 
-    @GetMapping("/all")
+    @GetMapping("")
     public ModelAndView allCategories() {
         Set<CategoryViewModel> categoryViewModels
                 = new TreeSet<CategoryViewModel>(Comparator.comparing(CategoryViewModel::getId));
@@ -57,12 +57,12 @@ public class CategoryController extends BaseController {
             CategoryViewModel categoryViewModel = this.modelMapper.map(categoryServiceModel, CategoryViewModel.class);
             categoryViewModels.add(categoryViewModel);
         });
-        return super.view("views/category/all", categoryViewModels);
+        return super.view("views/categories/all", categoryViewModels);
     }
 
     @GetMapping("/{categoryName}")
     public ModelAndView findPostsByCategory(@PathVariable String categoryName) {
         CategoryServiceModel categoryServiceModel = this.categoryService.findByName(categoryName);
-        return super.view("views/category/posts-by-category", categoryServiceModel);
+        return super.view("views/categories/posts-by-category", categoryServiceModel);
     }
 }
