@@ -42,7 +42,7 @@ public class Brand {
     }
 
     @OneToMany(
-            mappedBy = "brands",
+            mappedBy = "brand",
             cascade = CascadeType.ALL,
             orphanRemoval = true,
             fetch = FetchType.EAGER

@@ -1,5 +1,6 @@
 package com.store.areas.product.models.service;
 
+import com.store.areas.brand.models.service.BrandServiceModel;
 import com.store.areas.category.models.service.CategoryServiceModel;
 import com.store.areas.user.models.service.UserServiceModel;
 
@@ -17,6 +18,8 @@ public class ProductServiceModel {
     private BigDecimal price;
 
     private LocalDateTime createdAt;
+
+    private BrandServiceModel brand;
 
     private Set<CategoryServiceModel> categories;
 
@@ -76,5 +79,13 @@ public class ProductServiceModel {
 
     public void setUser(UserServiceModel user) {
         this.user = user;
+    }
+
+    public BrandServiceModel getBrand() {
+        return brand;
+    }
+
+    public void setBrand(BrandServiceModel brand) {
+        this.brand = brand;
     }
 }
