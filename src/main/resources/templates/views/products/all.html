@@ -9,7 +9,7 @@
                 </h5>
                 <th:block th:each="category : ${viewModel.categories}">
                     <div class="list-group">
-                        <a th:href="@{/products?category={name}(name=${category.name})}" class="list-group-item d-flex justify-content-between">
+                        <a th:href="@{/products?category={name}(name=${category.name})}" class="list-group-item d-flex justify-content-between text-dark">
                             <span class="" th:text="${category.name}"></span>
                             <div>
                                 <span class="badge text-white bg-info p-1" th:text="${#sets.size(category.products)}"></span>
@@ -19,6 +19,21 @@
                 </th:block>
             </div>
             <hr>
+            <div class="list-category">
+                <h5 class="title">
+                    Brands
+                </h5>
+                <th:block th:each="brand : ${viewModel.brands}">
+                    <div class="list-group">
+                        <a href="#" class="list-group-item d-flex justify-content-between">
+                            <span class="text-dark" th:text="${brand.name}"></span>
+                            <div>
+                                <span class="badge text-white bg-info p-1" th:text="${#sets.size(brand.products)}"></span>
+                            </div>
+                        </a>
+                    </div>
+                </th:block>
+            </div>
         </div>
         <div class="col-md-8 col-lg-10 col-xl-10">
             <h2>Products:</h2>
