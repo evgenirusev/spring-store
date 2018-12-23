@@ -17,7 +17,7 @@
             </div>
             <h4>Categories:</h4>
             <th:block th:each="category : *{categories}">
-                <h5><a th:text="${category.name}" th:href="@{/products?categories={name}(name=${category.name})}"></a></h5>
+                <h5><a th:text="${category.name}" th:href="@{/products?category={name}(name=${category.name})}"></a></h5>
             </th:block>
         </div>
     </div>

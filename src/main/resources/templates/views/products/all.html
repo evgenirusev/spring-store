@@ -9,7 +9,7 @@
                 </h5>
                 <th:block th:each="categories : ${viewModel.categories}">
                     <div class="list-group">
-                        <a th:href="@{/products?categories={name}(name=${categories.name})}"
+                        <a th:href="@{/products?category={name}(name=${categories.name})}"
                            class="list-group-item d-flex justify-content-between text-dark">
                             <span class="" th:text="${categories.name}"></span>
                             <div>
