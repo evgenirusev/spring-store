@@ -51,4 +51,14 @@ public class ProductServiceImpl implements ProductService {
         Product productEntity = this.productRepository.findByName(id);
         return this.modelMapper.map(productEntity, ProductServiceModel.class);
     }
+
+    @Override
+    public Set<ProductServiceModel> findAllContainingName(String name) {
+        Set<ProductServiceModel> productServiceModels = new HashSet<>();
+        this.productRepository.findAllByNameContaining(name).forEach(productEntity -> {
+            ProductServiceModel productServiceModel = this.modelMapper.map(productEntity, ProductServiceModel.class);
+            productServiceModels.add(productServiceModel);
+        });
+        return productServiceModels;
+    }
 }

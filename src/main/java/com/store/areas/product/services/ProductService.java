@@ -12,4 +12,6 @@ public interface ProductService {
     ProductServiceModel findByName(String name);
 
     ProductServiceModel findById(String id);
+
+    Set<ProductServiceModel> findAllContainingName(String name);
 }

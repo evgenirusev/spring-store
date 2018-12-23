@@ -76,10 +76,12 @@ public class ProductController extends BaseController {
         return super.redirect("/");
     }
 
+    // Refactor
     @GetMapping("")
     public ModelAndView all(
             @RequestParam(value = "category", required = false) String categoryNameGetParameter,
-            @RequestParam(value = "brand", required = false) String brandNameGetParameter) {
+            @RequestParam(value = "brand", required = false) String brandNameGetParameter,
+            @RequestParam(value = "search", required = false) String searchGetParameter) {
         AllProductsViewModel allProductsViewModel = new AllProductsViewModel();
         Set<ProductViewModel> productViewModels = new TreeSet<>(Comparator.comparing(ProductViewModel::getName));
         Set<CategoryViewModel> categoryViewModels = new TreeSet<>(Comparator.comparing(CategoryViewModel::getName));
@@ -93,6 +95,11 @@ public class ProductController extends BaseController {
             });
         } else if (brandNameGetParameter != null) {
             this.brandService.findByName(brandNameGetParameter).getProducts().forEach(productServiceModel -> {
+                ProductViewModel productViewModel = this.modelMapper.map(productServiceModel, ProductViewModel.class);
+                productViewModels.add(productViewModel);
+            });
+        } else if (searchGetParameter != null) {
+            this.productService.findAllContainingName(searchGetParameter).forEach(productServiceModel -> {
                 ProductViewModel productViewModel = this.modelMapper.map(productServiceModel, ProductViewModel.class);
                 productViewModels.add(productViewModel);
             });
