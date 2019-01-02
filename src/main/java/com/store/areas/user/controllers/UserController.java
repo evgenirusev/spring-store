@@ -70,7 +70,7 @@ public class UserController extends BaseController {
     public ModelAndView userProfile(@PathVariable String username) {
         UserServiceModel userServiceModel = this.userService.findByUsername(username);
         UserViewModel userViewModel = this.modelMapper.map(userServiceModel, UserViewModel.class);
-        
+
         List<SaleViewModel> sales = new ArrayList<>();
         this.saleService.findSalesByUsername(username).forEach(saleServiceModel -> {
             SaleViewModel saleViewModel = this.modelMapper.map(saleServiceModel, SaleViewModel.class);

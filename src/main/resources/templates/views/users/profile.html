@@ -1,15 +1,39 @@
-<div class="container" xmlns:th="http://www.thymeleaf.org">
-    <h2 th:text="|'s Profile|"></h2>
-    <p th:text="|See what 's been up to in Spring Store|"></p>
+<div class="container" xmlns:th="http://www.thymeleaf.org" th:object="${viewModel}">
+    <h2 th:text="|*{user.username}'s Profile|"></h2>
+    <p th:text="|See what *{user.username}'s been up to in Spring Store|"></p>
     <hr class="bg-info hr-2">
     <div class="row">
         <div class="col-md-6">
             <h3>Created products</h3>
-
+            <th:block th:each="product : *{user.products}">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 th:text="${product.name}"></h4>
+                        <h5 th:text="${product.price}"></h5>
+                        <p th:text="${product.description}"></p>
+                    </div>
+                    <div class="card-footer">
+                        <a th:href="@{/product/{product}(product=${product.name})}" class="btn btn-link">Checkout</a>
+                    </div>
+                </div>
+                <hr>
+            </th:block>
         </div>
         <div class="col-md-6">
-            <h3>Purchases</h3>
-
+            <h3>Products purchased</h3>
+            <th:block th:each="sale : *{sales}">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 th:text="${sale.product.name}"></h4>
+                        <h5 th:text="${sale.product.price}"></h5>
+                        <p th:text="${sale.product.description}"></p>
+                    </div>
+                    <div class="card-footer">
+                        <a th:href="@{/product/{product}(product=${sale.product.name})}" class="btn btn-link">Checkout</a>
+                    </div>
+                </div>
+                <hr>
+            </th:block>
         </div>
     </div>
 </div>
