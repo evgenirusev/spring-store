@@ -1,8 +1,33 @@
 .container {
     margin-top: 20px;
-    min-height: 600px;
 }
 
 .hr-2 {
     height: 2px;
+}
+
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.slider img {
+    height: 100vh;
+    width: 100%;
+    overflow: auto;
+}
+
+.header .home-page {
+    text-align: center;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 46px;
+    text-shadow: 2px 2px 2px grey, 2px 2px 2px grey, 2px 2px 2px grey, 2px 2px 2px grey;
 }
