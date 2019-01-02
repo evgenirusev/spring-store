@@ -13,6 +13,8 @@ import com.store.areas.product.models.view.AllProductsViewModel;
 import com.store.areas.product.models.view.ProductViewModel;
 import com.store.areas.product.services.ProductService;
 import com.store.areas.sale.models.binding.CreateSaleBindingModel;
+import com.store.areas.sale.models.service.SaleServiceModel;
+import com.store.areas.sale.services.SaleService;
 import com.store.areas.user.models.service.UserServiceModel;
 import com.store.areas.user.services.UserService;
 import org.modelmapper.ModelMapper;
@@ -41,13 +43,16 @@ public class ProductController extends BaseController {
 
     private final BrandService brandService;
 
+    private final SaleService saleService;
+
     @Autowired
-    public ProductController(ModelMapper modelMapper, ProductService productService, CategoryService categoryService, UserService userService, BrandService brandService) {
+    public ProductController(ModelMapper modelMapper, ProductService productService, CategoryService categoryService, UserService userService, BrandService brandService, SaleService saleService) {
         this.modelMapper = modelMapper;
         this.productService = productService;
         this.categoryService = categoryService;
         this.userService = userService;
         this.brandService = brandService;
+        this.saleService = saleService;
     }
 
     @GetMapping("/create")
@@ -134,5 +139,29 @@ public class ProductController extends BaseController {
         ProductServiceModel productServiceModel = this.productService.findByName(name);
         ProductViewModel productViewModel = this.modelMapper.map(productServiceModel, ProductViewModel.class);
         return super.view("/views/products/by-name", productViewModel);
+    }
+
+    @PostMapping("/{name}/purchase")
+    public ModelAndView purchaseProduct(@Valid @ModelAttribute CreateSaleBindingModel createSaleBindingModel, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            redirect("/products/" + createSaleBindingModel);
+        }
+
+        UserServiceModel userServiceModel = this.userService.findByUsername(createSaleBindingModel.getUser());
+        ProductServiceModel productServiceModel = this.productService.findByName(createSaleBindingModel.getProduct());
+
+        if (userServiceModel == null || productServiceModel == null) {
+            redirect("/products/" + createSaleBindingModel);
+        }
+
+        SaleServiceModel saleServiceModel = new SaleServiceModel();
+        saleServiceModel.setUser(userServiceModel);
+        saleServiceModel.setProduct(productServiceModel);
+        saleServiceModel.setPrice(createSaleBindingModel.getPrice());
+
+        this.saleService.createSale(saleServiceModel);
+
+        return super.redirect("/");
     }
 }

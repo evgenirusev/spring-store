@@ -9,9 +9,11 @@
             <div class="d-flex justify-content-between">
                 <h4 th:text="|Price: *{price}|"></h4>
 
-                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#purchaseModal">
-                    Purchase
-                </button>
+                <div sec:authorize="${isAuthenticated()}">
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#purchaseModal">
+                        Purchase
+                    </button>
+                </div>
             </div>
             <hr>
             <div class="description mb-5">
