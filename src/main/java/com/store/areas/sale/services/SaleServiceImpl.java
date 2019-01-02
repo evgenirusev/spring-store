@@ -7,6 +7,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class SaleServiceImpl implements SaleService {
 
@@ -18,6 +21,18 @@ public class SaleServiceImpl implements SaleService {
     public SaleServiceImpl(ModelMapper modelMapper, SaleRepository saleRepository) {
         this.modelMapper = modelMapper;
         this.saleRepository = saleRepository;
+    }
+
+    @Override
+    public List<SaleServiceModel> findSalesByUsername(String username) {
+        List<SaleServiceModel> saleServiceModels = new ArrayList<>();
+
+        this.saleRepository.findAllByUserUsername(username).forEach(saleEntity -> {
+            SaleServiceModel saleServiceModel = this.modelMapper.map(saleEntity, SaleServiceModel.class);
+            saleServiceModels.add(saleServiceModel);
+        });
+
+        return saleServiceModels;
     }
 
     @Override

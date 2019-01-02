@@ -1,8 +1,12 @@
 package com.store.areas.user.controllers;
 
 import com.store.abstractions.controller.BaseController;
+import com.store.areas.sale.models.service.SaleServiceModel;
+import com.store.areas.sale.models.view.SaleViewModel;
+import com.store.areas.sale.services.SaleService;
 import com.store.areas.user.models.binding.UserRegisterBindingModel;
 import com.store.areas.user.models.service.UserServiceModel;
+import com.store.areas.user.models.view.ProfileViewModel;
 import com.store.areas.user.models.view.UserViewModel;
 import com.store.areas.user.services.UserService;
 import org.modelmapper.ModelMapper;
@@ -16,17 +20,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class UserController extends BaseController {
 
     private final UserService userService;
 
+    private final SaleService saleService;
+
     private final ModelMapper modelMapper;
 
     @Autowired
-    public UserController(UserService userService, ModelMapper modelMapper) {
+    public UserController(UserService userService, SaleService saleService, ModelMapper modelMapper) {
         this.userService = userService;
+        this.saleService = saleService;
         this.modelMapper = modelMapper;
     }
 
@@ -47,13 +56,6 @@ public class UserController extends BaseController {
         return super.redirect("/login");
     }
 
-    @GetMapping("/users/{username}")
-    public ModelAndView userProfile(@PathVariable String username) {
-        UserServiceModel userServiceModel = this.userService.findByUsername(username);
-        UserViewModel userViewModel = this.modelMapper.map(userServiceModel, UserViewModel.class);
-        return super.view("/views/users/profile", userViewModel);
-    }
-
     @GetMapping("/login")
     public ModelAndView login(String error, ModelAndView mav) {
         mav.addObject("viewName", "/views/users/login");
@@ -62,5 +64,23 @@ public class UserController extends BaseController {
             mav.addObject("error", "Wrong username or password");
         }
         return mav;
+    }
+
+    @GetMapping("/users/{username}")
+    public ModelAndView userProfile(@PathVariable String username) {
+        UserServiceModel userServiceModel = this.userService.findByUsername(username);
+        UserViewModel userViewModel = this.modelMapper.map(userServiceModel, UserViewModel.class);
+        
+        List<SaleViewModel> sales = new ArrayList<>();
+        this.saleService.findSalesByUsername(username).forEach(saleServiceModel -> {
+            SaleViewModel saleViewModel = this.modelMapper.map(saleServiceModel, SaleViewModel.class);
+            sales.add(saleViewModel);
+        });
+
+        ProfileViewModel profileViewModel = new ProfileViewModel();
+        profileViewModel.setUser(userViewModel);
+        profileViewModel.setSales(sales);
+
+        return super.view("/views/users/profile", profileViewModel);
     }
 }
