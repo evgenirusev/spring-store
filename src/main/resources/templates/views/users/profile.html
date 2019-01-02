@@ -13,7 +13,7 @@
                         <p th:text="${product.description}"></p>
                     </div>
                     <div class="card-footer">
-                        <a th:href="@{/product/{product}(product=${product.name})}" class="btn btn-link">Checkout</a>
+                        <a th:href="@{/products/{product}(product=${product.name})}" class="btn btn-link">Checkout</a>
                     </div>
                 </div>
                 <hr>
@@ -29,7 +29,7 @@
                         <p th:text="${sale.product.description}"></p>
                     </div>
                     <div class="card-footer">
-                        <a th:href="@{/product/{product}(product=${sale.product.name})}" class="btn btn-link">Checkout</a>
+                        <a th:href="@{/products/{product}(product=${sale.product.name})}" class="btn btn-link">Checkout</a>
                     </div>
                 </div>
                 <hr>
