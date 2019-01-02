@@ -12,15 +12,18 @@ import com.store.areas.product.models.service.ProductServiceModel;
 import com.store.areas.product.models.view.AllProductsViewModel;
 import com.store.areas.product.models.view.ProductViewModel;
 import com.store.areas.product.services.ProductService;
+import com.store.areas.sale.models.binding.CreateSaleBindingModel;
 import com.store.areas.user.models.service.UserServiceModel;
 import com.store.areas.user.services.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -127,7 +130,7 @@ public class ProductController extends BaseController {
     }
 
     @GetMapping("/{name}")
-    public ModelAndView byName(@PathVariable String name) {
+    public ModelAndView byName(@PathVariable String name, @ModelAttribute CreateSaleBindingModel createSaleBindingModel) {
         ProductServiceModel productServiceModel = this.productService.findByName(name);
         ProductViewModel productViewModel = this.modelMapper.map(productServiceModel, ProductViewModel.class);
         return super.view("/views/products/by-name", productViewModel);
