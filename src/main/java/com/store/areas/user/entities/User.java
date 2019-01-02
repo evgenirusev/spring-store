@@ -2,6 +2,7 @@ package com.store.areas.user.entities;
 
 import com.store.areas.product.entities.Product;
 import com.store.areas.role.entities.Role;
+import com.store.areas.sale.entities.Sale;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -22,6 +23,7 @@ public class User implements UserDetails {
     private boolean isCredentialsNonExpired;
     private Set<Role> authorities;
     private Set<Product> products;
+    private Set<Sale> sales;
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -131,5 +133,18 @@ public class User implements UserDetails {
 
     public void setProducts(Set<Product> products) {
         this.products = products;
+    }
+
+    @OneToMany(
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    public Set<Sale> getSales() {
+        return sales;
+    }
+
+    public void setSales(Set<Sale> sales) {
+        this.sales = sales;
     }
 }
