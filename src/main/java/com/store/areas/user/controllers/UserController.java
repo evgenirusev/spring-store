@@ -1,7 +1,7 @@
 package com.store.areas.user.controllers;
 
 import com.store.abstractions.controller.BaseController;
-import com.store.areas.sale.models.service.SaleServiceModel;
+import com.store.areas.recaptcha.service.RecaptchaService;
 import com.store.areas.sale.models.view.SaleViewModel;
 import com.store.areas.sale.services.SaleService;
 import com.store.areas.user.models.binding.UserRegisterBindingModel;
@@ -13,12 +13,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,11 +30,14 @@ public class UserController extends BaseController {
 
     private final ModelMapper modelMapper;
 
+    private final RecaptchaService recaptchaService;
+
     @Autowired
-    public UserController(UserService userService, SaleService saleService, ModelMapper modelMapper) {
+    public UserController(UserService userService, SaleService saleService, ModelMapper modelMapper, RecaptchaService recaptchaService) {
         this.userService = userService;
         this.saleService = saleService;
         this.modelMapper = modelMapper;
+        this.recaptchaService = recaptchaService;
     }
 
     @GetMapping("/register")
@@ -46,9 +47,16 @@ public class UserController extends BaseController {
 
     @PostMapping("/register")
     public ModelAndView registerConfirm(@Valid @ModelAttribute UserRegisterBindingModel userRegisterBindingModel,
-                                        BindingResult bindingResult) {
+                                        BindingResult bindingResult,
+                                        @RequestParam(name = "g-recaptcha-response") String gRecaptchaResponse,
+                                        HttpServletRequest request) {
+
         if (bindingResult.hasErrors()) {
             return super.view("views/users/register", "Register");
+        }
+
+        if (!this.recaptchaService.verifyRecaptcha(request.getRemoteAddr(), gRecaptchaResponse).equals("success")) {
+            return super.redirect("/register");
         }
 
         UserServiceModel userServiceModel = this.modelMapper.map(userRegisterBindingModel, UserServiceModel.class);

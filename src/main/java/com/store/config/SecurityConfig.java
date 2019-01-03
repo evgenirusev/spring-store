@@ -35,18 +35,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/products/create").hasAnyAuthority("USER", "ADMIN")
-                .antMatchers("/categories/create").hasAnyAuthority("ADMIN")
-                .antMatchers("/", "/register", "/css/**", "/img/**", "/contact", "/about", "/product/**").permitAll()
+                    .antMatchers("/products/create").hasAnyAuthority("USER", "ADMIN")
+                    .antMatchers("/categories/create").hasAnyAuthority("ADMIN")
+                    .antMatchers("/", "/register", "/js/**", "/css/**", "/img/**", "/contact", "/about", "/product/**").permitAll()
                 .and()
-                .formLogin().loginPage("/login").permitAll()
-                .usernameParameter("username")
-                .passwordParameter("password")
+                    .formLogin().loginPage("/login").permitAll()
+                    .usernameParameter("username")
+                    .passwordParameter("password")
                 .and()
-                .logout().logoutSuccessUrl("/login?logout").logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll()
+                    .logout().logoutSuccessUrl("/login?logout").logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll()
                 .and()
-                .csrf()
-                .csrfTokenRepository(getCsrfTokenRepository());
+                    .csrf()
+                    .csrfTokenRepository(getCsrfTokenRepository())
+                .and()
+                    .rememberMe()
+                    .rememberMeParameter("remember-me-new")
+                    .key("35d1711e-1835-486b-b033-1c0d547f4f26")
+                    .userDetailsService(this.userService)
+                    .rememberMeCookieName("SPRING_SECURITY_REMEMBER_ME_COOKIE")
+                    .tokenValiditySeconds(2400);
     }
 
     private CsrfTokenRepository getCsrfTokenRepository() {

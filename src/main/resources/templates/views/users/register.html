@@ -1,6 +1,6 @@
 <div xmlns:th="http://www.w3.org/1999/xhtml" class="container bg-white view w-40">
     <h1 class="text-center">Register</h1>
-    <form th:object="${userRegisterBindingModel}" class="offset-3 col-md-6" th:method="post" th:action="@{/register}">
+    <form th:object="${userRegisterBindingModel}" class="pb-5 offset-3 col-md-6" th:method="post" th:action="@{/register}">
         <hr class="hr-2 bg-info"/>
         <div class="form-group" th:classappend="${#fields.hasErrors('username')} ? 'has-error'">
             <label for="username">Username</label>
@@ -26,8 +26,12 @@
             <input type="checkbox" class="form-check-input" id="is-admin" name="admin">
             <label class="form-check-label" for="is-admin">Admin</label>
         </div>
-        <div class="button-holder d-flex justify-content-around pb-2">
-            <button type="submit" class="btn bg-light-green btn-info">Register</button>
+        <div class="d-flex justify-content-around m-2">
+            <div class="g-recaptcha" data-sitekey="6Ld-boQUAAAAACY3mdTKCwEI3pABtLYWuIQqpYVs"></div>
+        </div>
+        <div class="text-danger text-center pb-3" id="captchaError"></div>
+        <div class="button-holder mb-5 d-flex justify-content-around pb-2">
+            <button type="submit" class="btn bg-light-green btn-info" id="registerSubmitButton">Register</button>
         </div>
     </form>
 </div>
