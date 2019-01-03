@@ -7,6 +7,7 @@
         </div>
         <div class="col-md-4">
             <h2 class="mb-4">Brand: <a th:href="@{/products?brand={name}(name=*{brand.name})}" th:text="*{brand.name}"></a></h2>
+            <hr class="hr-2 bg-info">
             <div class="d-flex justify-content-between">
                 <h4 th:text="|Price: *{price}|"></h4>
                 <div sec:authorize="${isAuthenticated()}">

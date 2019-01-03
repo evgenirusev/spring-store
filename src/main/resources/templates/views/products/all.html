@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-4 col-lg-2 col-xl-2 ">
             <h2>Results:</h2>
-            <hr>
+            <hr class="bg-info">
             <div class="list-categories">
                 <h5 class="title">
                     Categories:
@@ -23,13 +23,13 @@
                     </div>
                 </th:block>
             </div>
-            <hr>
+            <hr class="bg-info">
             <div class="list-categories">
                 <h5 class="title">
                     Brands
                 </h5>
                 <div th:if="${#sets.isEmpty(viewModel.brands)}">
-                    <p class="text-secondary">There are still no brands yet. Consider listing one by creating a product yourself!</p>
+                    <p class="text-secondary">There are no brands yet. Consider listing one by creating a product yourself!</p>
                 </div>
                 <th:block th:each="brand : ${viewModel.brands}">
                     <div class="list-group">
@@ -53,7 +53,7 @@
                     <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
                 </form>
             </div>
-            <hr>
+            <hr class="bg-info hr-2">
             <div class="row">
                 <th:block th:each="product : ${viewModel.products}">
                         <div class="col-xs-18 col-sm-6 col-md-6 col-lg-4 col-xl-3 text-center mb-5">
