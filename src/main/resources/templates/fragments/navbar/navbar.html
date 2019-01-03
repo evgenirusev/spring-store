@@ -1,4 +1,4 @@
-<div class="container-fluid m-0 p-0" xmlns:th="http://www.w3.org/1999/html">
+<div class="container-fluid m-0 p-0" xmlns:th="http://www.thymeleaf.org">
     <nav class="navbar navbar-light bg-light navbar-expand-lg">
         <a class="navbar-brand" th:href="@{/}">Store</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
@@ -11,21 +11,28 @@
                     <a class="nav-link" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" th:href="@{/products}">Products</a>
+                    <a class="nav-link" th:href="@{/products}" th:text="#{nav.products}"></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" th:href="@{/categories}">Categories</a>
+                    <a class="nav-link" th:href="@{/categories}"th:text="#{nav.categories}">Categories</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" th:href="@{/brands}">Brands</a>
+                    <a class="nav-link" th:href="@{/brands}" th:text="#{nav.brands}">Brands</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" th:href="@{/contact}">Contact</a>
+                    <a class="nav-link" th:href="@{/contact}" th:text="#{nav.contact}">Contact</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" th:href="@{/about}">About</a>
+                    <a class="nav-link" th:href="@{/about}" th:text="#{nav.about}">About</a>
                 </li>
             </ul>
+            <div class="mr-2">
+                <select class="form-control" id="languageSelect">
+                    <option value="" th:text="#{lang}"></option>
+                    <option value="en" th:text="#{change.lang.en}"></option>
+                    <option value="bg" th:text="#{change.lang.bg}"></option>
+                </select>
+            </div>
             <div sec:authorize="isAnonymous()">
                 <th:block th:include="~{fragments/navbar/authorities/guest}"/>
             </div>

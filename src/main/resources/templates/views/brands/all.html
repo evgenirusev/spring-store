@@ -1,5 +1,5 @@
-<div class="container">
-    <h1>Brands</h1>
+<div class="container" xmlns:th="http://www.thymeleaf.org">
+    <h1 th:text="#{brands}">Brands</h1>
     <hr class="hr-2 bg-info">
     <div th:if="${#sets.size(viewModel) > 0}">
         <th:block th:each="brand : ${viewModel}">
@@ -14,6 +14,6 @@
         </th:block>
     </div>
     <div th:unless="${#sets.size(viewModel) > 0}">
-        <h5 class="text-secondary"><i>There are no brands yet. Consider listing one by creating a product yourself!</i></h5>
+        <h5 class="text-secondary"><i th:text="#{products.no.brands}">There are no brands yet. Consider listing one by creating a product yourself!</i></h5>
     </div>
 </div>

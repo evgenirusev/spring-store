@@ -29,7 +29,7 @@ footer {
     transform: translate(-50%, -50%);
     color: white;
     font-size: 46px;
-    text-shadow: 2px 2px 2px grey, 2px 2px 2px grey, 2px 2px 2px grey, 2px 2px 2px grey;
+    text-shadow: 1px 1px 1px grey, 1px 1px 1px grey, 1px 1px 1px grey, 1px 1px 1px grey;
 }
 
 a {

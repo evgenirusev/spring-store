@@ -1,20 +1,20 @@
-<div class="container view bg-white create-content" xmlns:th="http://www.w3.org/1999/xhtml">
+<div class="container view bg-white create-content" xmlns:th="http://www.thymeleaf.org">
     <div class="offset-md-2 col-md-8">
-        <h1>Create New Category</h1>
+        <h1 th:text="#{create.category}">Create New Category</h1>
         <form class="p-4" th:method="post" th:action="@{/categories/create}" th:object="${categoryBindingModel}">
             <div class="form-group" th:classappend="${#fields.hasErrors('name')} ? 'has-error'">
-                <label for="exampleFormControlInput1">Category Title</label>
-                <input type="text" class="form-control" name="name" id="exampleFormControlInput1" placeholder="Title"
+                <label for="exampleFormControlInput1" th:text="#{create.category.title}">Category Title</label>
+                <input type="text" class="form-control" name="name" id="exampleFormControlInput1" th:placeholder="#{create.category.title}"
                        th:field="*{name}">
                 <div class="text-danger" th:each="error : ${#fields.errors('name')}" th:text="${error}">Error Message
                 </div>
             </div>
             <div class="form-group">
-                <label for="exampleFormControlTextarea1">Description</label>
+                <label for="exampleFormControlTextarea1" th:text="#{create.product.product.description}">Description</label>
                 <textarea class="form-control" name="description" id="exampleFormControlTextarea1"
-                          placeholder="Category description" rows="5" th:field="*{description}"></textarea>
+                          th:placeholder="#{create.category.description}" rows="5" th:field="*{description}"></textarea>
             </div>
-            <button type="submit" class="btn bg-light-green btn-info ">Create</button>
+            <button type="submit" class="btn bg-light-green btn-info" th:text="#{create.product.create.button}">Create</button>
         </form>
     </div>
 </div>

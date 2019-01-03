@@ -1,14 +1,14 @@
 <div class="container" xmlns:th="http://www.thymeleaf.org">
     <div class="row">
         <div class="col-md-4 col-lg-2 col-xl-2 ">
-            <h2>Results:</h2>
+            <h2 th:text="|#{products.results}:|">Results:</h2>
             <hr class="bg-info">
             <div class="list-categories">
-                <h5 class="title">
+                <h5 class="title" th:text="|#{products.categories}:|">
                     Categories:
                 </h5>
                 <div th:if="${#sets.isEmpty(viewModel.categories)}">
-                    <p class="text-secondary"><i>There are no categories yet.</i></p>
+                    <p class="text-secondary"><i th:text="#{products.no.categories}">There are no categories yet.</i></p>
                 </div>
                 <th:block th:each="categories : ${viewModel.categories}">
                     <div class="list-group">
@@ -25,11 +25,11 @@
             </div>
             <hr class="bg-info">
             <div class="list-categories">
-                <h5 class="title">
+                <h5 class="title" th:text="#{brands}">
                     Brands
                 </h5>
                 <div th:if="${#sets.isEmpty(viewModel.brands)}">
-                    <p class="text-secondary"><i>There are no brands yet. Consider listing one by creating a product yourself!</i></p>
+                    <p class="text-secondary"><i th:text="#{products.no.brands}">There are no brands yet. Consider listing one by creating a product yourself!</i></p>
                 </div>
                 <th:block th:each="brand : ${viewModel.brands}">
                     <div class="list-group">
@@ -47,10 +47,10 @@
         </div>
         <div class="col-md-8 col-lg-10 col-xl-10">
             <div class="d-flex justify-content-between">
-                <h2>Products:</h2>
+                <h2 th:text="|#{products}:|">Products:</h2>
                 <form class="form-inline my-2 my-lg-0" method="get" action="/products">
-                    <input name="search" class="form-control mr-sm-2" type="search" placeholder="Search by name" aria-label="Search">
-                    <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
+                    <input name="search" class="form-control mr-sm-2" type="search" th:placeholder="#{search.field}" aria-label="Search">
+                    <button class="btn btn-outline-info my-2 my-sm-0" type="submit" th:text="#{search}">Search</button>
                 </form>
             </div>
             <hr class="bg-info hr-2">
@@ -75,7 +75,7 @@
                     <hr class="bg-info">
                 </div>
                 <div th:if="${param.search == null} and ${#sets.isEmpty(viewModel.products)}">
-                    <p class="text-secondary"><i>There are no products for sale yet. Consider listing one yourself!</i></p>
+                    <p class="text-secondary"><i th:text="#{products.no.products}">There are no products for sale yet. Consider listing one yourself!</i></p>
                     <hr class="bg-info">
                 </div>
             </div>

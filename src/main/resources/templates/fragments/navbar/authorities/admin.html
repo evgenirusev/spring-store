@@ -1,9 +1,9 @@
 <a class="rounded nav-link d-inline-block text-white bg-info"
-   th:href="@{/products/create}" th:text="|Create Product|">
+   th:href="@{/products/create}" th:text="#{nav.create.product}">
 </a>
 
 <a class="rounded ml-2 text-white nav-link d-inline-block bg-info"
-   th:href="@{/categories/create}">Create Category
+   th:href="@{/categories/create}" th:text="#{nav.create.category}">Create Category
 </a>
 
 <a class="text-dark nav-link d-inline-block" th:href="@{/users/{username}(username=${#authentication.getPrincipal().getUsername()})}"

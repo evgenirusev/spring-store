@@ -1,10 +1,11 @@
-<div class="view container bg-white" xmlns:th="http://www.w3.org/1999/xhtml">
+<div class="view container bg-white" xmlns:th="http://www.thymeleaf.org">
     <div class="row">
         <div class="col-sm-12 col-lg-12">
-            <h1 class="h1">
+            <h1 class="h1" th:text="#{contact}">
                 Contact
             </h1>
-            <p><i>Feel free to contact us</i></p>
+            <p><i th:text="#{contact.description}">Feel free to contact us</i></p>
+            <hr class="hr-2 bg-info">
         </div>
     </div>
 
@@ -16,39 +17,39 @@
                     <input type="hidden" name="_token" value="LFulLppUPi4e1arvRIR37crcafzyJ0ne6OyOV2FD">					<div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="name">
+                            <label for="name" th:text="#{contact.name}">
                                 Name</label>
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" required="required" />
+                            <input type="text" class="form-control" id="name" name="name" th:placeholder="#{contact.name.field}" required="required" />
                         </div>
                         <div class="form-group">
-                            <label for="email">
+                            <label for="email" th:text="#{contact.email}">
                                 Email Address</label>
                             <div class="input-group">
 											<span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span>
 										</span>
-                                <input id="email" type="email" class="form-control" name="email" placeholder="Enter email" required="required" /></div>
+                                <input id="email" type="email" class="form-control" name="email" th:placeholder="#{contact.email.field}" required="required" /></div>
                         </div>
                         <div class="form-group">
-                            <label for="subject">
+                            <label for="subject" th:text="#{contact.subject}">
                                 Subject</label>
                             <select id="subject" name="subject" class="form-control" required="required">
-                                <option value="na" selected="">Choose One:</option>
-                                <option value="suggestions">Product Suggestions</option>
-                                <option value="product">Support</option>
-                                <option value="other">Other</option>
+                                <option value="na" selected="" th:text="#{contact.subject.choose}">Choose One:</option>
+                                <option value="suggestions" th:text="#{contact.product.suggestion}">Product Suggestions</option>
+                                <option value="product" th:text="#{contact.support}">Support</option>
+                                <option value="other" th:text="#{contact.other}">Other</option>
                             </select>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="name">
+                            <label for="name" th:text="#{contact.message}">
                                 Message</label>
                             <textarea name="message" id="message" class="form-control" rows="9" cols="25" required="required"
-                                      placeholder="Message"></textarea>
+                                      th:placeholder="#{contact.message.field}"></textarea>
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <button type="submit" class="btn bg-light-green btn-info pull-right">
+                        <button type="submit" class="btn bg-light-green btn-info pull-right" th:text="#{contact.send.button}">
                             Send Message</button>
                     </div>
                 </div>
@@ -57,7 +58,7 @@
         </div>
         <div class="col-md-4">
             <form>
-                <legend><span class="glyphicon glyphicon-globe"></span>Our Details</legend>
+                <legend th:text="#{contact.our.details}"><span class="glyphicon glyphicon-globe"></span>Our Details</legend>
                 <address>
                     <strong>Rusev Web Services</strong><br>
                     Plovdiv, Bulgaria<br>

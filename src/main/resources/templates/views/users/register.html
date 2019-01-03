@@ -1,37 +1,37 @@
-<div xmlns:th="http://www.w3.org/1999/xhtml" class="container bg-white view w-40">
-    <h1 class="text-center">Register</h1>
+<div xmlns:th="http://www.thymeleaf.org" class="container bg-white view w-40">
+    <h1 class="text-center" th:text="#{register}">Register</h1>
     <form th:object="${userRegisterBindingModel}" class="pb-5 offset-3 col-md-6" th:method="post" th:action="@{/register}">
         <hr class="hr-2 bg-info"/>
         <div class="form-group" th:classappend="${#fields.hasErrors('username')} ? 'has-error'">
-            <label for="username">Username</label>
-            <input type="text" class="form-control" id="username" placeholder="Username..." name="username" required th:field="*{username}"/>
+            <label for="username" th:text="#{register.username}">Username</label>
+            <input type="text" class="form-control" id="username" th:placeholder="|#{register.username}|" name="username" required th:field="*{username}"/>
             <div class="text-danger" id="usernameHelp"  th:each="error : ${#fields.errors('username')}" th:text="${error}">Error Message</div>
         </div>
         <div class="form-group" th:classappend="${#fields.hasErrors('password')} ? 'has-error'">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" placeholder="Password..." name="password" required>
+            <label for="password" th:text="#{register.password}">Password</label>
+            <input type="password" class="form-control" id="password" th:placeholder="|#{register.password}|" name="password" required>
             <div class="text-danger" id="passwordHelp"  th:each="error : ${#fields.errors('password')}" th:text="${error}">Error Message</div>
         </div>
         <div class="form-group" th:classappend="*{password} != *{confirmPassword} ? 'has-error'" >
-            <label for="confirmPassword">Confirm Password</label>
-            <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password..." name="confirmPassword" required>
+            <label for="confirmPassword" th:text="#{register.confirm.password}">Confirm Password</label>
+            <input type="password" class="form-control" id="confirmPassword" th:placeholder="|#{register.confirm.password}...|" name="confirmPassword" required>
             <div  class="text-danger" th:if="*{password} != *{confirmPassword}">Passwords Not Matching</div>
         </div>
         <div class="form-group" th:classappend="${#fields.hasErrors('email')} ? 'has-error'">
-            <label class="form-control-label" for="email">Email</label>
-            <input type="email" class="form-control" id="email" th:field="*{email}" placeholder="Your Email..."/>
+            <label class="form-control-label" for="email" th:text="#{register.email}">Email</label>
+            <input type="email" class="form-control" id="email" th:field="*{email}" th:placeholder="|#{register.email}...|"/>
             <div class="text-danger" id="emailHelp"  th:each="error : ${#fields.errors('email')}" th:text="${error}">Error Message</div>
         </div>
         <div class="form-check text-center m-3">
             <input type="checkbox" class="form-check-input" id="is-admin" name="admin">
-            <label class="form-check-label" for="is-admin">Admin</label>
+            <label class="form-check-label" for="is-admin" th:text="#{register.admin}">Admin</label>
         </div>
         <div class="d-flex justify-content-around m-2">
             <div class="g-recaptcha" data-sitekey="6Ld-boQUAAAAACY3mdTKCwEI3pABtLYWuIQqpYVs"></div>
         </div>
         <div class="text-danger text-center pb-3" id="captchaError"></div>
         <div class="button-holder mb-5 d-flex justify-content-around pb-2">
-            <button type="submit" class="btn bg-light-green btn-info" id="registerSubmitButton">Register</button>
+            <button type="submit" class="btn bg-light-green btn-info" id="registerSubmitButton" th:text="#{register}">Register</button>
         </div>
     </form>
 </div>

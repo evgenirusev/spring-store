@@ -1,5 +1,5 @@
-<div class="container mb-4">
-    <h1>Categories</h1>
+<div class="container mb-4" xmlns:th="http://www.thymeleaf.org">
+    <h1 th:text="#{categories}">Categories</h1>
     <hr class="hr-2 bg-info">
     <div th:if="${#sets.size(viewModel) > 0}">
         <th:block th:each="category : ${viewModel}">
@@ -16,6 +16,6 @@
         </th:block>
     </div>
     <div th:unless="${#sets.size(viewModel) > 0}">
-        <h5 class="text-secondary"><i>There are no categories yet. Consider creating one yourself by logging in as administrator.</i></h5>
+        <h5 class="text-secondary"><i th:text="#{products.no.categories}">There are no categories yet. Consider creating one yourself by logging in as administrator.</i></h5>
     </div>
 </div>
