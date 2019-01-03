@@ -8,7 +8,7 @@
                     Categories:
                 </h5>
                 <div th:if="${#sets.isEmpty(viewModel.categories)}">
-                    <p class="text-secondary">There are no categories yet.</p>
+                    <p class="text-secondary"><i>There are no categories yet.</i></p>
                 </div>
                 <th:block th:each="categories : ${viewModel.categories}">
                     <div class="list-group">
@@ -29,7 +29,7 @@
                     Brands
                 </h5>
                 <div th:if="${#sets.isEmpty(viewModel.brands)}">
-                    <p class="text-secondary">There are no brands yet. Consider listing one by creating a product yourself!</p>
+                    <p class="text-secondary"><i>There are no brands yet. Consider listing one by creating a product yourself!</i></p>
                 </div>
                 <th:block th:each="brand : ${viewModel.brands}">
                     <div class="list-group">
@@ -54,7 +54,7 @@
                 </form>
             </div>
             <hr class="bg-info hr-2">
-            <div class="row">
+            <div class="row ml-1">
                 <th:block th:each="product : ${viewModel.products}">
                         <div class="col-xs-18 col-sm-6 col-md-6 col-lg-4 col-xl-3 text-center mb-5">
                             <div class="thumbnail">
@@ -70,13 +70,13 @@
                         </div>
                 </th:block>
                 <div th:if="${param.search != null} and ${#sets.isEmpty(viewModel.products)}">
-                    <p class="text-secondary">There are no posts matching your criteria: "<b><span
+                    <p class="text-secondary"><i>There are no posts matching your criteria: </i>"<b><span
                             th:text="${param.search}"></span></b>"</p>
-                    <hr class="bg-info hr-2">
+                    <hr class="bg-info">
                 </div>
                 <div th:if="${param.search == null} and ${#sets.isEmpty(viewModel.products)}">
-                    <p class="text-secondary">There are no products for sale yet. Consider listing one yourself!</p>
-                    <hr class="bg-info hr-2">
+                    <p class="text-secondary"><i>There are no products for sale yet. Consider listing one yourself!</i></p>
+                    <hr class="bg-info">
                 </div>
             </div>
         </div>
