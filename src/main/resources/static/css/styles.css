@@ -31,3 +31,7 @@ footer {
     font-size: 46px;
     text-shadow: 2px 2px 2px grey, 2px 2px 2px grey, 2px 2px 2px grey, 2px 2px 2px grey;
 }
+
+a {
+    text-decoration: none!important;
+}
