@@ -1,6 +1,6 @@
-<div class="container view bg-white w-40" xmlns:th="http://www.thymeleaf.org">
+<div class="container bg-white" xmlns:th="http://www.thymeleaf.org">
     <h1 class="text-center" th:text="#{login}">Login</h1>
-    <form class="offset-3 col-md-6" th:method="post" th:action="@{/login}">
+    <form class="offset-sm-0 col-sm-12 offset-md-3 col-md-6" th:method="post" th:action="@{/login}">
         <hr class="bg-info hr-2"/>
         <th:block th:if="${error != null}">
             <div class="alert alert-dismissible alert-danger">
