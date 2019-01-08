@@ -95,7 +95,7 @@ public class ProductController extends BaseController {
         Set<CategoryViewModel> categoryViewModels = new TreeSet<>(Comparator.comparing(CategoryViewModel::getName));
         Set<BrandViewModel> brandViewModels = new TreeSet<>(Comparator.comparing(BrandViewModel::getName));
 
-        // Refactor
+        // Refactor using command pattern
         if (categoryNameGetParameter != null) {
             this.categoryService.findByName(categoryNameGetParameter).getProducts().forEach(productServiceModel -> {
                 ProductViewModel productViewModel = this.modelMapper.map(productServiceModel, ProductViewModel.class);
