@@ -1,0 +1,10 @@
+<div class="thumbnail">
+    <div class="caption">
+        <a th:href="@{/products/{name}(name=${product.name})}">
+            <img src="img/product.png" class="w-75">
+        </a>
+        <h5 class="pt-1" th:text="${product.name}"></h5>
+        <p th:text="|$${product.price}|"></p>
+        <a th:href="@{/products/{name}(name=${product.name})}" class="btn btn-info btn-xs" role="button">View</a>
+    </div>
+</div>

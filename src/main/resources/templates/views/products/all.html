@@ -1,83 +1,33 @@
 <div class="container" xmlns:th="http://www.thymeleaf.org">
     <div class="row">
+
+        <!-- SIDEBAR -->
         <div class="col-md-4 col-lg-2 col-xl-2 ">
-            <h2 th:text="|#{products.results}:|">Results:</h2>
-            <hr class="bg-info">
-            <div class="list-categories">
-                <h5 class="title" th:text="|#{products.categories}:|">
-                    Categories:
-                </h5>
-                <div th:if="${#sets.isEmpty(viewModel.categories)}">
-                    <p class="text-secondary"><i th:text="#{products.no.categories}">There are no categories yet.</i></p>
-                </div>
-                <th:block th:each="categories : ${viewModel.categories}">
-                    <div class="list-group">
-                        <a th:href="@{/products?category={name}(name=${categories.name})}"
-                           class="list-group-item d-flex justify-content-between text-dark">
-                            <span class="" th:text="${categories.name}"></span>
-                            <div>
-                                <span class="badge text-white bg-info p-1"
-                                      th:text="${#sets.size(categories.products)}"></span>
-                            </div>
-                        </a>
-                    </div>
-                </th:block>
-            </div>
-            <hr class="bg-info">
-            <div class="list-categories">
-                <h5 class="title" th:text="#{brands}">
-                    Brands
-                </h5>
-                <div th:if="${#sets.isEmpty(viewModel.brands)}">
-                    <p class="text-secondary"><i th:text="#{products.no.brands}">There are no brands yet. Consider listing one by creating a product yourself!</i></p>
-                </div>
-                <th:block th:each="brand : ${viewModel.brands}">
-                    <div class="list-group">
-                        <a th:href="@{/products?brand={name}(name=${brand.name})}"
-                           class="list-group-item d-flex justify-content-between">
-                            <span class="text-dark" th:text="${brand.name}"></span>
-                            <div>
-                                <span class="badge text-white bg-info p-1"
-                                      th:text="${#sets.size(brand.products)}"></span>
-                            </div>
-                        </a>
-                    </div>
-                </th:block>
-            </div>
+            <th:block th:include="~{fragments/products/all/sidebar}"></th:block>
         </div>
+
         <div class="col-md-8 col-lg-10 col-xl-10">
+
+            <!-- HEADER & SEARCH FORM -->
             <div class="d-flex justify-content-between">
                 <h2 th:text="|#{products}:|">Products:</h2>
-                <form class="form-inline my-2 my-lg-0" method="get" action="/products">
-                    <input name="search" class="form-control mr-sm-2" type="search" th:placeholder="#{search.field}" aria-label="Search">
-                    <button class="btn btn-outline-info my-2 my-sm-0" type="submit" th:text="#{search}">Search</button>
-                </form>
+                <th:block th:include="~{fragments/products/all/search-form}"></th:block>
             </div>
+
             <hr class="bg-info hr-2">
+
+            <!--RENDER POSTS-->
             <div class="row ml-1">
                 <th:block th:each="product : ${viewModel.products}">
-                        <div class="col-xs-18 col-sm-6 col-md-6 col-lg-4 col-xl-3 text-center mb-5">
-                            <div class="thumbnail">
-                                <div class="caption">
-                                    <a th:href="@{/products/{name}(name=${product.name})}">
-                                        <img src="img/product.png" class="w-75">
-                                    </a>
-                                    <h5 class="pt-1" th:text="${product.name}"></h5>
-                                    <p th:text="|$${product.price}|"></p>
-                                    <a th:href="@{/products/{name}(name=${product.name})}" class="btn btn-info btn-xs" role="button">View</a>
-                                </div>
-                            </div>
+                        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 text-center mb-5">
+                            <!-- INDIVIDUAL PRODUCT -->
+                            <th:block th:include="~{fragments/products/all/product}"></th:block>
                         </div>
                 </th:block>
-                <div th:if="${param.search != null} and ${#sets.isEmpty(viewModel.products)}">
-                    <p class="text-secondary"><i>There are no posts matching your criteria: </i>"<b><span
-                            th:text="${param.search}"></span></b>"</p>
-                    <hr class="bg-info">
-                </div>
-                <div th:if="${param.search == null} and ${#sets.isEmpty(viewModel.products)}">
-                    <p class="text-secondary"><i th:text="#{products.no.products}">There are no products for sale yet. Consider listing one yourself!</i></p>
-                    <hr class="bg-info">
-                </div>
+
+                <!-- IF PRODUCTS ARE MISSING NOTIFICATION -->
+                <th:block th:include="~{fragments/products/all/missing-products-message}"></th:block>
+
             </div>
         </div>
     </div>

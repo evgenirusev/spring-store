@@ -1,0 +1,9 @@
+<div th:if="${param.search != null} and ${#sets.isEmpty(viewModel.products)}">
+    <p class="text-secondary"><i>There are no posts matching your criteria: </i>"<b><span
+            th:text="${param.search}"></span></b>"</p>
+    <hr class="bg-info">
+</div>
+<div th:if="${param.search == null} and ${#sets.isEmpty(viewModel.products)}">
+    <p class="text-secondary"><i th:text="#{products.no.products}">There are no products for sale yet. Consider listing one yourself!</i></p>
+    <hr class="bg-info">
+</div>
