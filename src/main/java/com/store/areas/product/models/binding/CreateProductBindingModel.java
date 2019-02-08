@@ -1,16 +1,23 @@
 package com.store.areas.product.models.binding;
 
+import com.store.constants.Constants;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
 public class CreateProductBindingModel {
+    @Size(min = 1, max = 50, message = Constants.PRODUCT_NAME_LENGTH)
     private String name;
 
     private String description;
 
+    @NotNull
     private String brand;
 
     private String[] categories;
 
+    @NotNull
     private BigDecimal price;
 
     public CreateProductBindingModel() {

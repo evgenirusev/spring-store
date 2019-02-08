@@ -45,6 +45,8 @@ public class ProductController extends BaseController {
 
     private final SaleService saleService;
 
+    private List<CategoryViewModel> validationRedirectCache;
+
     @Autowired
     public ProductController(ModelMapper modelMapper, ProductService productService, CategoryService categoryService, UserService userService, BrandService brandService, SaleService saleService) {
         this.modelMapper = modelMapper;
@@ -63,11 +65,18 @@ public class ProductController extends BaseController {
                     this.modelMapper.map(categoryServiceModel, CategoryViewModel.class);
             categoryViewModels.add(categoryViewModel);
         });
+        this.validationRedirectCache = categoryViewModels;
         return super.view("views/products/create", categoryViewModels);
     }
 
-    @PostMapping("create")
-    public ModelAndView createConfirm(@ModelAttribute CreateProductBindingModel bindingModel, Authentication authentication) {
+    @PostMapping("/create")
+    public ModelAndView createConfirm(@Valid @ModelAttribute CreateProductBindingModel bindingModel
+            , Authentication authentication, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            return super.view("views/products/create", this.validationRedirectCache);
+        }
+
         ProductServiceModel productServiceModel = this.modelMapper.map(bindingModel, ProductServiceModel.class);
         UserServiceModel userServiceModel = this.userService.findByUsername(authentication.getName());
         productServiceModel.setUser(userServiceModel);
@@ -81,10 +90,11 @@ public class ProductController extends BaseController {
         }
         productServiceModel.setCategories(categoryServiceModels);
         productService.create(productServiceModel);
-        return super.redirect("/");
+        this.validationRedirectCache.clear();
+        return super.redirect("/products");
     }
 
-    // Refactor
+    // REFACTOR
     @GetMapping("")
     public ModelAndView all(
             @RequestParam(value = "category", required = false) String categoryNameGetParameter,
